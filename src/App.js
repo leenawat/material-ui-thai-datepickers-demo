@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import './App.css';
 import Button from '@material-ui/core/Button';
+import moment from "moment";
 import MomentUtils from '@date-io/moment';
+import "moment/locale/th";
+
+import './App.css';
 
 import {
   DatePicker,
@@ -10,8 +13,9 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 
+moment.locale("th");
 function App () {
-
+  const [locale, setLocale] = useState("th");
   const [selectedDate, handleDateChange] = useState(new Date());
 
   return (
@@ -19,7 +23,7 @@ function App () {
       <Button variant="contained" color="primary">
         Hello World
       </Button>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
+      <MuiPickersUtilsProvider libInstance={moment} utils={MomentUtils} locale={locale}>
         <DatePicker value={selectedDate} onChange={handleDateChange} />
         <TimePicker value={selectedDate} onChange={handleDateChange} />
         <DateTimePicker value={selectedDate} onChange={handleDateChange} />
